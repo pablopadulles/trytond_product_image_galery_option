@@ -14,4 +14,4 @@ def register():
         product.ProductType,
         product.ProductTypeOption,
         # category.Category,
-        module='product_image_galery', type_='model')
+        module='product_image_galery_option', type_='model')
