@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<form col="6">
+    <label name="active"/>
+    <field name="active"/>
+    <label name="variante2"/>
+    <field name="variante2"/>
+    <notebook colspan="6">
+        <page string="General" id="general">
+            <label name="precio_lista"/>
+            <field name="precio_lista" colspan="3"/>
+        </page>
+        <page id="images" string="Galeria de Imagenes" col="1">
+            <field name="images" colspan="1"/>
+        </page>
+        <page id="mas_info" string="Mas Info" col="4">
+            <label name="cost_price"/>
+            <field name="cost_price"/>
+        </page>
+    </notebook>
+</form>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<data>
+    <xpath expr="//field[@name='description']" position="replace_attributes">
+        <field name="description" widget="richtext" toolbar="1"/>
+    </xpath>
+</data>

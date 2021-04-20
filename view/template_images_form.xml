@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<form col="4">
+    <label name="sequence"/>
+    <field name="sequence"/>
+    <label name="template"/>
+    <field name="template" xexpand="1"/>
+    <newline/>
+    <label name="image_name"/>
+    <field name="image_name"/>
+    <label name="image"/>
+    <field name="image" widget="image"/>
+    <field name="image_id"/>
+</form>

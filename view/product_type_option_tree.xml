@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<tree editable="1">
+    <field name="name"/>
+    <field name="type"/>
+    <field name="image_name" tree_invisible="1"/>
+    <field name="image"/>
+    <field name="image_f" widget="image"/>
+</tree>

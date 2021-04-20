@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<form col="6">
+    <group col="4" colspan="6" id="estandar">
+        <label name="name"/>
+        <field name="name" xexpand="1"/>
+        <label name="url"/>
+        <field name="url" xexpand="1"/>
+        <newline/>
+        <label name="code"/>
+        <field name="code"/>
+        <label name="active"/>
+        <field name="active" xexpand="0" width="25"/>
+    </group>
+
+    <notebook colspan="6">
+        <page string="General" id="general">
+            <label name="list_price"/>
+            <field name="list_price"/>
+            <label name="variante"/>
+            <field name="variante" widget="selection"/>
+            <newline/>
+            <field name="products" mode="tree,form" colspan="6"
+              view_ids="product_image_galery.product_mejorado_view_tree,product_image_galery.product_mejorado_view_form"/>
+            <field name="categories" colspan="6"
+              view_ids="product.category_view_list"/>
+        </page>
+        <page id="images" string="Galeria de Imagenes" col="1">
+            <label name="images"/>
+            <field name="images"/>
+        </page>
+        <page string="Mas Info" id="mas_info">
+            <label name="type"/>
+            <field name="type"/>
+<!--            <group colspan="2" col="-1" id="checkboxes">-->
+<!--            <label name="consumable"/>-->
+<!--            <field name="consumable" xexpand="0" width="25"/>-->
+<!--            </group>-->
+            <label name="default_uom"/>
+            <field name="default_uom" />
+            <label name="cost_price_method"/>
+            <field name="cost_price_method"/>
+            <newline/>
+        </page>
+    </notebook>
+    <field name="description" widget="richtext" toolbar="1"/>
+
+</form>
