@@ -22,7 +22,7 @@ this repository contains the full copyright notices and license terms. -->
             <field name="variante" widget="selection"/>
             <newline/>
             <field name="products" mode="tree,form" colspan="6"
-              view_ids="product_image_galery.product_mejorado_view_tree,product_image_galery.product_mejorado_view_form"/>
+              view_ids="product_image_galery_option.product_mejorado_view_tree,product_image_galery_option.product_mejorado_view_form"/>
             <field name="categories" colspan="6"
               view_ids="product.category_view_list"/>
         </page>
