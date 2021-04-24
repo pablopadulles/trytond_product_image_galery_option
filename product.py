@@ -89,14 +89,6 @@ class Product(metaclass=PoolMeta):
             help="The standard price the product is sold at.")
     variante2 = fields.Many2One('product.product.type.option', 'Opcion', domain=[('type', '=', Eval('_parent_template.variante'))])
 
-    @fields.depends('variante', 'variante2')
-    def on_change_with_variante2(self, name=None):
-        if self.variante2:
-            if not self.variante:
-                return None
-            else:
-                return self.variante2.id
-
     def get_image(self):
         if self.images:
             return self.images[0].get_img()
