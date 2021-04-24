@@ -3,6 +3,8 @@ import stdnum.exceptions
 from sql import Null, Column, Literal
 from sql.functions import CharLength, Substring, Position
 from sql.operators import Equal
+from PIL import Image, ExifTags
+from io import BytesIO
 
 from trytond.i18n import gettext
 from trytond.model import (ModelView, ModelSQL, MultiValueMixin, ValueMixin,
@@ -116,6 +118,44 @@ class ProductImages(sequence_ordered('sequence', 'Orden de Listado'),
     image_f = fields.Function(fields.Binary('Imagen', filename='image_name',
         file_id=file_id, store_prefix=None), 'get_image_f')
 
+    @classmethod
+    def convert_photo(cls, data):
+        if data and Image:
+            image = Image.open(BytesIO(data))
+            # if image._getexif():
+            #     exif = dict((ExifTags.TAGS[k], v) for k, v in image._getexif().items() if k in ExifTags.TAGS)
+            #     if exif.get('Orientation'):
+            #         if exif.get('Orientation')%2==0:
+            #             image = image.rotate(90, expand=True)
+            image.thumbnail((388, 500), Image.ANTIALIAS)
+            data = BytesIO()
+            if not (image.format):
+                image.save(data, 'JPEG')
+            else:
+                image.save(data, image.format)
+            data = fields.Binary.cast(data.getvalue())
+        return data
+
+    @classmethod
+    def write(cls, *args):
+        actions = iter(args)
+        args = []
+        for product, vals in zip(actions, actions):
+            if 'image' in vals:
+                vals['image'] = cls.convert_photo(vals['image'])
+            args.extend((product, vals))
+
+        super(ProductImages, cls).write(*args)
+
+    @classmethod
+    def create(cls, vlist):
+        vlist = [x.copy() for x in vlist]
+        for values in vlist:
+            if 'image' in values:
+                values['image'] = cls.convert_photo(values['image'])
+
+        return super(ProductImages, cls).create(vlist)
+
     def get_img(self):
         foto = None
         if self.image_id:
@@ -156,6 +196,47 @@ class TemplateImages(sequence_ordered('sequence', 'Orden de Listado'),
                           file_id=file_id, store_prefix=None)
     image_f = fields.Function(fields.Binary('Imagen', filename='image_name',
         file_id=file_id, store_prefix=None), 'get_image_f')
+
+    @classmethod
+    def convert_photo(cls, data):
+        if data and Image:
+            image = Image.open(BytesIO(data))
+            # if image._getexif():
+            #     exif = dict((ExifTags.TAGS[k], v) for k, v in image._getexif().items() if k in ExifTags.TAGS)
+            #     if exif.get('Orientation'):
+            #         if exif.get('Orientation')%2==0:
+            #             image = image.rotate(90, expand=True)
+            image.thumbnail((388, 500), Image.ANTIALIAS)
+            data = BytesIO()
+            if not (image.format):
+                image.save(data, 'JPEG')
+            else:
+                image.save(data, image.format)
+            data = fields.Binary.cast(data.getvalue())
+        return data
+
+    @classmethod
+    def write(cls, *args):
+        actions = iter(args)
+        args = []
+        for product, vals in zip(actions, actions):
+            if 'image' in vals:
+                vals['image'] = cls.convert_photo(vals['image'])
+            args.extend((product, vals))
+
+        super(TemplateImages, cls).write(*args)
+
+    @classmethod
+    def create(cls, vlist):
+        vlist = [x.copy() for x in vlist]
+        for values in vlist:
+            import pdb;
+            pdb.set_trace()
+
+            if 'image' in values:
+                values['image'] = cls.convert_photo(values['image'])
+
+        return super(TemplateImages, cls).create(vlist)
 
     def get_img(self):
         foto = None
