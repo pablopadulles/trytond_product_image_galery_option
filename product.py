@@ -41,12 +41,17 @@ class Template(metaclass=PoolMeta):
     description = fields.Text("Description")
     url = fields.Char('URL', help="La URL no deve tener espacios.")
 
+    @classmethod
+    def __setup__(cls):
+        super(Template, cls).__setup__()
+        cls.products.states['readonly'] = Not(Eval('variante', False))
+
     @fields.depends('name', 'url')
     def on_change_name(self, name=None):
         val = ''
         if self.name:
             val = self.name.lower().replace(' ', '-')
-            val = val.replace('é', 'e').replace('á', 'a').replace('í', 'i').replace('ó', 'o').replace('ú', 'u').replace('ñ', 'n')
+            val = val.replace('é', 'e').replace('á', 'a').replace('í', 'i').replace('ó', 'o').replace('ú', 'u').replace('ñ', 'n').replace('.', '-')
             self.url = val
 
     def get_image(self):
