@@ -230,8 +230,6 @@ class TemplateImages(sequence_ordered('sequence', 'Orden de Listado'),
     def create(cls, vlist):
         vlist = [x.copy() for x in vlist]
         for values in vlist:
-            import pdb;
-            pdb.set_trace()
 
             if 'image' in values:
                 values['image'] = cls.convert_photo(values['image'])
