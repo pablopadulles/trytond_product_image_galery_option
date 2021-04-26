@@ -180,8 +180,8 @@ class ProductImages(sequence_ordered('sequence', 'Orden de Listado'),
             return file_name
 
     def get_rec_name(self, name):
-        if self.name:
-            return self.name
+        if self.name.template:
+            return self.name.template.rec_name
 
 
 class TemplateImages(sequence_ordered('sequence', 'Orden de Listado'),
