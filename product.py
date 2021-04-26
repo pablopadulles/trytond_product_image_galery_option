@@ -175,8 +175,8 @@ class ProductImages(sequence_ordered('sequence', 'Orden de Listado'),
     def get_image_name(self, name):
         file_name = ''
         if self.name:
-            if self.name.rec_name:
-                file_name = self.name.rec_name + ".jpg"
+            if self.name.template.rec_name:
+                file_name = self.name.template.rec_name + ".jpg"
             return file_name
 
     def get_rec_name(self, name):
