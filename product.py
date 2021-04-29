@@ -57,7 +57,9 @@ class Template(metaclass=PoolMeta):
             self.url = val
 
     def get_image(self):
-        return self.products[0].get_image()
+        if self.images:
+            return self.images[0].get_img()
+        return None
 
     @classmethod
     def default_products(cls):
@@ -89,7 +91,14 @@ class Product(metaclass=PoolMeta):
     precio_lista = fields.Numeric(
             "Precio Lista", required=True, digits=(16,2),
             help="The standard price the product is sold at.")
-    variante2 = fields.Many2One('product.product.type.option', 'Opcion', domain=[('type', '=', Eval('_parent_template.variante'))])
+    variante2 = fields.Many2One('product.product.type.option', 'Opcion', domain=[('type', '=', Eval('_parent_template.variante'))],
+                                states={'required': True})
+
+    def get_precio_lista(self):
+        if self.precio_lista == 0:
+            return self.template.list_prices[0].list_price
+        else:
+            return self.precio_lista
 
     def get_image(self):
         if self.images:
