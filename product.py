@@ -42,6 +42,7 @@ class Template(metaclass=PoolMeta):
     variante = fields.Many2One('product.product.type', 'Variante', states={'readonly': Bool(Eval('products'))})
     description = fields.Text("Description")
     url = fields.Char('URL', help="La URL no deve tener espacios.")
+    variante_bool = fields.Function(fields.Boolean('Producto con Variantes'),'get_variante_bool')
 
     @classmethod
     def __setup__(cls):
@@ -81,6 +82,12 @@ class Template(metaclass=PoolMeta):
         else:
             return res_all
         return res
+
+    def get_variante_bool(self, name):
+        if self.variante:
+            return True
+        else:
+            return False
 
 
 class Product(metaclass=PoolMeta):
