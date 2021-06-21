@@ -42,7 +42,8 @@ class Template(metaclass=PoolMeta):
     variante = fields.Many2One('product.product.type', 'Variante', states={'readonly': Bool(Eval('products'))})
     description = fields.Text("Description")
     url = fields.Char('URL', help="La URL no deve tener espacios.")
-    variante_bool = fields.Function(fields.Boolean('Producto con Variantes'),'get_variante_bool')
+    variante_bool = fields.Function(fields.Boolean('Producto con Variantes', states={'invisible': True}),'get_variante_bool')
+    sku = fields.Char('SKU', states={'invisible': Bool(Eval('variante_bool'))})
 
     @classmethod
     def __setup__(cls):
@@ -100,6 +101,7 @@ class Product(metaclass=PoolMeta):
             help="The standard price the product is sold at.")
     variante2 = fields.Many2One('product.product.type.option', 'Opcion', domain=[('type', '=', Eval('_parent_template.variante'))],
                                 states={'required': True})
+    sku = fields.Char('SKU')
 
     def get_precio_lista(self):
         if self.precio_lista == 0:

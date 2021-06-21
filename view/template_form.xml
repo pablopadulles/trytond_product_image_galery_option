@@ -8,8 +8,8 @@ this repository contains the full copyright notices and license terms. -->
         <label name="url"/>
         <field name="url" xexpand="1"/>
         <newline/>
-        <label name="code"/>
-        <field name="code"/>
+        <label name="sku"/>
+        <field name="sku"/>
         <label name="active"/>
         <field name="active" xexpand="0" width="25"/>
     </group>
@@ -45,5 +45,6 @@ this repository contains the full copyright notices and license terms. -->
         </page>
     </notebook>
     <field name="description" widget="richtext" toolbar="1"/>
+    <field name="variante_bool"/>
 
 </form>

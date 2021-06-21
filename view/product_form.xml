@@ -4,6 +4,8 @@ this repository contains the full copyright notices and license terms. -->
 <form col="6">
     <label name="active"/>
     <field name="active"/>
+    <label name="sku"/>
+    <field name="sku"/>
     <label name="variante2"/>
     <field name="variante2"/>
     <notebook colspan="6">
